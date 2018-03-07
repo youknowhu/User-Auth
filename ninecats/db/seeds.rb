@@ -23,6 +23,8 @@ cat5 = Cat.create!(name: Faker::Cat.name, birth_date: Faker::Date.birthday(0, 14
 
 cat_rental1 = CatRentalRequest.create!(cat_id: cat1.id, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 1, 31))
 cat_rental2 = CatRentalRequest.create!(cat_id: cat1.id, start_date: Date.new(2012, 2, 1), end_date: Date.new(2012, 2, 28))
+cat_rental3 = CatRentalRequest.create!(cat_id: Cat.first.id, start_date: Date.new(2012,1,15), end_date: Date.new(2012,1,29), status: 'APPROVED')
+cat_rental4 = CatRentalRequest.create!(cat_id: Cat.first.id, start_date: Date.new(2012,1,28), end_date: Date.new(2012,2,2), status: 'APPROVED')
+
 
 # cat_rental2 = CatRentalRequest.create!(cat_id: cat1.id, start_date: '02/01/2012', end_date: '02/29/2012')
-CatRentalRequest.new(cat_id: Cat.first.id, start_date: Date.new(2012,1,15), end_date: Date.new(2012,1,29), status: 'APPROVED')

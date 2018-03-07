@@ -2,6 +2,7 @@ class CatRentalRequest < ApplicationRecord
   STATUS = ['APPROVED', 'DENIED', 'PENDING']
   validates :cat_id, :start_date, :end_date, :status, presence: true
   validates :status, inclusion: { in: STATUS }
+  validate :does_not_overlap_approved_requests
 
   belongs_to :cat,
     foreign_key: :cat_id,
@@ -22,6 +23,12 @@ class CatRentalRequest < ApplicationRecord
 
   def overlapping_approved_requests
     overlapping_requests.where(status: 'APPROVED')
+  end
+
+  def does_not_overlap_approved_requests
+    if overlapping_approved_requests.exists?
+      errors[:body] << "You can't have that cat!"
+    end
   end
 
   def inspect
